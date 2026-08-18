@@ -49,14 +49,15 @@ export const handler = async event => {
       }));
       return json(200, { photos: signed });
     }
-    if (body.action === 'delete-photo') {
-      if (!body.photoId) return json(400, { error: 'Choose a photograph to delete.' });
-      const photos = await supabase(`/rest/v1/gallery_photos?id=eq.${encodeURIComponent(body.photoId)}&select=id,storage_path&limit=1`);
-      const photo = photos[0];
-      if (!photo) return json(404, { error: 'That photograph no longer exists.' });
-      await supabase('/storage/v1/object/private-galleries', { method: 'DELETE', body: JSON.stringify({ prefixes: [photo.storage_path] }) });
-      await supabase(`/rest/v1/gallery_photos?id=eq.${encodeURIComponent(photo.id)}`, { method: 'DELETE', headers: { Prefer: 'return=minimal' } });
-      return json(200, { ok: true });
+    if (body.action === 'delete-photos') {
+      const photoIds = [...new Set(Array.isArray(body.photoIds) ? body.photoIds : [])];
+      if (!photoIds.length || photoIds.length > 250 || photoIds.some(id => !/^[0-9a-f-]{36}$/i.test(id))) return json(400, { error: 'Choose valid photographs to delete.' });
+      const filter = photoIds.join(',');
+      const photos = await supabase(`/rest/v1/gallery_photos?id=in.(${filter})&select=id,storage_path`);
+      if (!photos.length) return json(404, { error: 'Those photographs no longer exist.' });
+      await supabase('/storage/v1/object/private-galleries', { method: 'DELETE', body: JSON.stringify({ prefixes: photos.map(photo => photo.storage_path) }) });
+      await supabase(`/rest/v1/gallery_photos?id=in.(${photos.map(photo => photo.id).join(',')})`, { method: 'DELETE', headers: { Prefer: 'return=minimal' } });
+      return json(200, { ok: true, deleted: photos.length });
     }
     return json(400, { error: 'Unknown action' });
   } catch (error) {

@@ -112,6 +112,8 @@ input:focus, select:focus, textarea:focus { outline: 3px solid rgba(184,139,85,.
 
 .admin-layout { display: grid; grid-template-columns: 260px 1fr; min-height: calc(100vh - 76px); }
 .admin-side { padding: 2rem 1rem; background: #20201e; color: white; }
+.admin-side .button.alt { border-color: white; background: transparent; color: white; }
+.admin-side .button.alt:hover { background: white; color: var(--ink); }
 .admin-main { padding: clamp(1.2rem, 4vw, 3rem); }
 .admin-stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2rem 0; }
 .admin-stat { padding: 1.5rem; background: white; border: 1px solid var(--line); border-radius: 12px; }
@@ -121,11 +123,16 @@ input:focus, select:focus, textarea:focus { outline: 3px solid rgba(184,139,85,.
 .photo-manager-heading { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
 .admin-photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
 .admin-photo-card { overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: var(--white); }
+.admin-photo-card { position: relative; }
 .admin-photo-card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; background: #ddd; }
 .admin-photo-card div { display: grid; gap: .75rem; padding: .85rem; }
 .admin-photo-card strong { min-width: 0; font-size: .8rem; overflow-wrap: anywhere; }
 .delete-button { border-color: #9c2424; background: #9c2424; }
 .delete-button:hover { background: #771b1b; }
+.checkbox-label { display: flex; grid-template-columns: auto 1fr; align-items: center; gap: .6rem; }
+.bulk-photo-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem; margin: 1rem 0; }
+.photo-select { position: absolute; top: .55rem; left: .55rem; z-index: 2; display: flex; grid-template-columns: auto 1fr; align-items: center; gap: .35rem; padding: .35rem .55rem; border-radius: 999px; background: rgba(255,255,255,.94); box-shadow: 0 2px 8px rgba(0,0,0,.15); font-size: .75rem; }
+.photo-select input { width: auto; }
 
 .site-footer { padding: 3rem 0; background: #171716; color: #d7d2ca; }
 .footer-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 2rem; }
@@ -144,7 +151,9 @@ input:focus, select:focus, textarea:focus { outline: 3px solid rgba(184,139,85,.
   .feature-grid, .price-grid { grid-template-columns: 1fr; }
   .price-card.featured { transform: none; }
   .admin-layout { grid-template-columns: 1fr; }
-  .admin-side { display: none; }
+  .admin-side { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem; }
+  .admin-side h2 { margin: 0; font-size: 1.4rem; }
+  .admin-side p { display: none; }
 }
 
 @media (max-width: 560px) {
