@@ -40,10 +40,27 @@ export const handler = async event => {
       await supabase('/rest/v1/gallery_photos', { method: 'POST', headers: { Prefer: 'return=minimal' }, body: JSON.stringify({ gallery_id: body.galleryId, storage_path: body.storagePath, filename: body.filename }) });
       return json(201, { ok: true });
     }
+    if (body.action === 'list-photos') {
+      if (!body.galleryId) return json(400, { error: 'Choose a gallery.' });
+      const photos = await supabase(`/rest/v1/gallery_photos?gallery_id=eq.${encodeURIComponent(body.galleryId)}&select=id,filename,storage_path,sort_order,created_at&order=sort_order.asc,created_at.asc`);
+      const signed = await Promise.all(photos.map(async photo => {
+        const result = await supabase(`/storage/v1/object/sign/private-galleries/${photo.storage_path}`, { method: 'POST', body: JSON.stringify({ expiresIn: 900 }) });
+        return { id: photo.id, filename: photo.filename, url: result.signedURL.startsWith('http') ? result.signedURL : `${process.env.SUPABASE_URL}${result.signedURL}` };
+      }));
+      return json(200, { photos: signed });
+    }
+    if (body.action === 'delete-photo') {
+      if (!body.photoId) return json(400, { error: 'Choose a photograph to delete.' });
+      const photos = await supabase(`/rest/v1/gallery_photos?id=eq.${encodeURIComponent(body.photoId)}&select=id,storage_path&limit=1`);
+      const photo = photos[0];
+      if (!photo) return json(404, { error: 'That photograph no longer exists.' });
+      await supabase('/storage/v1/object/private-galleries', { method: 'DELETE', body: JSON.stringify({ prefixes: [photo.storage_path] }) });
+      await supabase(`/rest/v1/gallery_photos?id=eq.${encodeURIComponent(photo.id)}`, { method: 'DELETE', headers: { Prefer: 'return=minimal' } });
+      return json(200, { ok: true });
+    }
     return json(400, { error: 'Unknown action' });
   } catch (error) {
     console.error(error);
     return json(error.message === 'Unauthorized' ? 401 : 500, { error: error.message === 'Unauthorized' ? 'Unauthorized' : 'The admin request failed.' });
   }
 };
-

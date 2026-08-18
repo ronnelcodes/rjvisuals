@@ -118,6 +118,14 @@ input:focus, select:focus, textarea:focus { outline: 3px solid rgba(184,139,85,.
 .admin-stat strong { display: block; font: 2rem var(--serif); }
 .admin-list { display: grid; gap: .75rem; }
 .gallery-row { display: grid; grid-template-columns: 1fr auto auto; gap: 1rem; align-items: center; padding: 1rem; border: 1px solid var(--line); border-radius: 10px; background: white; }
+.photo-manager-heading { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+.admin-photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+.admin-photo-card { overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: var(--white); }
+.admin-photo-card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; background: #ddd; }
+.admin-photo-card div { display: grid; gap: .75rem; padding: .85rem; }
+.admin-photo-card strong { min-width: 0; font-size: .8rem; overflow-wrap: anywhere; }
+.delete-button { border-color: #9c2424; background: #9c2424; }
+.delete-button:hover { background: #771b1b; }
 
 .site-footer { padding: 3rem 0; background: #171716; color: #d7d2ca; }
 .footer-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 2rem; }
@@ -143,6 +151,7 @@ input:focus, select:focus, textarea:focus { outline: 3px solid rgba(184,139,85,.
   .field-grid, .admin-stat-grid { grid-template-columns: 1fr; }
   .gallery-row { grid-template-columns: 1fr; }
   .hero-copy { padding-inline: 1rem; }
+  .photo-manager-heading { align-items: flex-start; flex-direction: column; }
 }
 
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }

@@ -1,6 +1,7 @@
 let accessToken = sessionStorage.getItem('rj_admin_token');
 let galleries = [];
 let editingGalleryId = null;
+let managedGalleryId = '';
 const loginView = document.querySelector('#admin-login');
 const appView = document.querySelector('#admin-app');
 const galleryForm = document.querySelector('#gallery-form');
@@ -124,9 +125,41 @@ document.querySelector('#upload-form').addEventListener('submit', async event =>
     status.textContent = `Uploaded ${files.length} photograph${files.length === 1 ? '' : 's'}.`;
     event.target.reset();
     await loadGalleries();
+    document.querySelector('#manage-gallery').value = galleryId;
+    managedGalleryId = galleryId;
+    await loadManagedPhotos();
   } catch (error) {
     status.className = 'error';
     status.textContent = error.message;
+  }
+});
+
+document.querySelector('#manage-gallery').addEventListener('change', event => {
+  managedGalleryId = event.target.value;
+  loadManagedPhotos();
+});
+
+document.querySelector('#refresh-photos').addEventListener('click', loadManagedPhotos);
+
+document.querySelector('#photo-manager-grid').addEventListener('click', async event => {
+  const button = event.target.closest('[data-delete-photo]');
+  if (!button) return;
+  const filename = button.dataset.filename || 'this photograph';
+  if (!confirm(`Permanently delete ${filename}? This cannot be undone.`)) return;
+  const status = document.querySelector('#photo-manager-status');
+  button.disabled = true;
+  status.className = '';
+  status.textContent = `Deleting ${filename}…`;
+  try {
+    await api({ action: 'delete-photo', photoId: button.dataset.deletePhoto });
+    status.className = 'success';
+    status.textContent = `${filename} was deleted.`;
+    await loadGalleries();
+    await loadManagedPhotos();
+  } catch (error) {
+    status.className = 'error';
+    status.textContent = error.message;
+    button.disabled = false;
   }
 });
 
@@ -149,6 +182,30 @@ async function loadGalleries() {
   document.querySelector('#photo-count').textContent = galleries.reduce((total, g) => total + (g.photo_count || 0), 0);
   document.querySelector('#admin-gallery-list').innerHTML = galleries.map(gallery => `<div class="gallery-row"><div><strong>${escapeHtml(gallery.title)}</strong><br><small>${escapeHtml(gallery.slug)} · ${gallery.photo_count || 0} photos</small></div><span class="tag">${escapeHtml(gallery.status)}</span><button class="button small alt" type="button" data-edit-gallery="${gallery.id}">Edit</button></div>`).join('') || '<p>No galleries yet.</p>';
   document.querySelector('#upload-gallery').innerHTML = '<option value="">Choose a gallery</option>' + galleries.map(gallery => `<option value="${gallery.id}">${escapeHtml(gallery.title)}</option>`).join('');
+  document.querySelector('#manage-gallery').innerHTML = '<option value="">Choose a gallery</option>' + galleries.map(gallery => `<option value="${gallery.id}">${escapeHtml(gallery.title)} (${gallery.photo_count || 0})</option>`).join('');
+  if (managedGalleryId && galleries.some(gallery => gallery.id === managedGalleryId)) document.querySelector('#manage-gallery').value = managedGalleryId;
+}
+
+async function loadManagedPhotos() {
+  const status = document.querySelector('#photo-manager-status');
+  const grid = document.querySelector('#photo-manager-grid');
+  if (!managedGalleryId) {
+    grid.innerHTML = '';
+    status.className = '';
+    status.textContent = 'Choose a gallery to view its photographs.';
+    return;
+  }
+  status.className = '';
+  status.textContent = 'Loading photographs…';
+  grid.innerHTML = '';
+  try {
+    const data = await api({ action: 'list-photos', galleryId: managedGalleryId });
+    status.textContent = `${data.photos.length} photograph${data.photos.length === 1 ? '' : 's'} in this gallery.`;
+    grid.innerHTML = data.photos.map(photo => `<article class="admin-photo-card"><img src="${escapeHtml(photo.url)}" alt="${escapeHtml(photo.filename)}" loading="lazy"><div><strong>${escapeHtml(photo.filename)}</strong><button class="button small delete-button" type="button" data-delete-photo="${photo.id}" data-filename="${escapeHtml(photo.filename)}">Delete</button></div></article>`).join('') || '<p>This gallery has no photographs.</p>';
+  } catch (error) {
+    status.className = 'error';
+    status.textContent = error.message;
+  }
 }
 
 function resetGalleryForm() {
@@ -164,4 +221,3 @@ function resetGalleryForm() {
 function value(id) { return document.querySelector(`#${id}`).value.trim(); }
 function escapeHtml(value = '') { return String(value).replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]); }
 if (accessToken) showAdmin();
-
