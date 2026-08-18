@@ -1,5 +1,5 @@
 import { randomBytes } from 'node:crypto';
-import { json, supabase, requireAdmin, hashPassword } from './_shared.mjs';
+import { json, supabase, requireAdmin, hashPassword, storageSignedUrl } from './_shared.mjs';
 
 const validStatus = status => ['draft', 'published', 'archived'].includes(status);
 const validSlug = slug => /^[a-z0-9-]+$/.test(slug || '');
@@ -45,7 +45,7 @@ export const handler = async event => {
       const photos = await supabase(`/rest/v1/gallery_photos?gallery_id=eq.${encodeURIComponent(body.galleryId)}&select=id,filename,storage_path,sort_order,created_at&order=sort_order.asc,created_at.asc`);
       const signed = await Promise.all(photos.map(async photo => {
         const result = await supabase(`/storage/v1/object/sign/private-galleries/${photo.storage_path}`, { method: 'POST', body: JSON.stringify({ expiresIn: 900 }) });
-        return { id: photo.id, filename: photo.filename, url: result.signedURL.startsWith('http') ? result.signedURL : `${process.env.SUPABASE_URL}${result.signedURL}` };
+        return { id: photo.id, filename: photo.filename, url: storageSignedUrl(result.signedURL) };
       }));
       return json(200, { photos: signed });
     }
