@@ -20,9 +20,33 @@ if (galleryRoot) {
   else {
     document.querySelector('#gallery-title').textContent = data.title;
     document.title = `${data.title} | RJ Visuals`;
-    galleryRoot.innerHTML = data.photos.length ? data.photos.map(photo => `<figure><img src="${escapeAttr(photo.url)}" alt="${escapeAttr(photo.filename)}" loading="lazy"></figure>`).join('') : '<p>This gallery is being prepared. Please check back soon.</p>';
+    document.querySelector('#order-gallery').value = data.title;
+    galleryRoot.innerHTML = data.photos.length ? data.photos.map(photo => `<figure><img src="${escapeAttr(photo.url)}" alt="${escapeAttr(photo.filename)}" loading="lazy"><figcaption>${escapeHtml(photo.filename)}</figcaption></figure>`).join('') : '<p>This gallery is being prepared. Please check back soon.</p>';
   }
 }
 
-function escapeAttr(value='') { return String(value).replace(/[&"'<>]/g, c => ({'&':'&amp;','"':'&quot;',"'":'&#39;','<':'&lt;','>':'&gt;'}[c])); }
+const printOrderForm = document.querySelector('#print-order-form');
+printOrderForm?.addEventListener('submit', async event => {
+  event.preventDefault();
+  const status = document.querySelector('#print-order-status');
+  const submit = printOrderForm.querySelector('button[type="submit"]');
+  status.className = '';
+  status.textContent = 'Sending your request…';
+  submit.disabled = true;
+  try {
+    const body = new URLSearchParams(new FormData(printOrderForm));
+    const response = await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString() });
+    if (!response.ok) throw new Error('Your request could not be sent. Please try again.');
+    printOrderForm.classList.add('hidden');
+    const success = document.querySelector('#print-order-success');
+    success.classList.remove('hidden');
+    success.focus();
+  } catch (error) {
+    status.className = 'error';
+    status.textContent = error.message;
+    submit.disabled = false;
+  }
+});
 
+function escapeAttr(value='') { return String(value).replace(/[&"'<>]/g, c => ({'&':'&amp;','"':'&quot;',"'":'&#39;','<':'&lt;','>':'&gt;'}[c])); }
+function escapeHtml(value='') { return escapeAttr(value); }
