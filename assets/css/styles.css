@@ -71,6 +71,8 @@ p { margin: 0 0 1.2rem; }
 .masonry img { width: 100%; transition: transform .4s ease; user-select: none; -webkit-user-select: none; -webkit-user-drag: none; }
 .masonry figure:hover img { transform: scale(1.025); }
 .masonry figcaption { padding: .55rem .7rem; background: var(--white); color: var(--muted); font-size: .8rem; overflow-wrap: anywhere; }
+.masonry figure.photo-load-error img { display: none; }
+.masonry figure.photo-load-error::before { content: 'Photograph unavailable'; display: grid; min-height: 220px; place-items: center; padding: 1rem; color: var(--muted); background: #eee; }
 .category-tabs { display: flex; flex-wrap: wrap; gap: .5rem; margin: 2rem 0; }
 .category-tabs button { padding: .55rem 1rem; border: 1px solid var(--line); border-radius: 999px; background: transparent; }
 .category-tabs button.active { background: var(--ink); color: white; }
