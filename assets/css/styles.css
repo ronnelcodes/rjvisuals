@@ -68,7 +68,7 @@ p { margin: 0 0 1.2rem; }
 
 .masonry { columns: 3 280px; column-gap: 1rem; }
 .masonry figure { break-inside: avoid; margin: 0 0 1rem; overflow: hidden; background: #ddd; }
-.masonry img { width: 100%; transition: transform .4s ease; }
+.masonry img { width: 100%; transition: transform .4s ease; user-select: none; -webkit-user-select: none; -webkit-user-drag: none; }
 .masonry figure:hover img { transform: scale(1.025); }
 .masonry figcaption { padding: .55rem .7rem; background: var(--white); color: var(--muted); font-size: .8rem; overflow-wrap: anywhere; }
 .category-tabs { display: flex; flex-wrap: wrap; gap: .5rem; margin: 2rem 0; }
@@ -80,6 +80,7 @@ p { margin: 0 0 1.2rem; }
 .price-card.featured { border: 2px solid var(--gold); transform: translateY(-10px); }
 .price { margin: .4rem 0 1.2rem; font: 500 2.2rem/1 var(--serif); }
 .price-card ul { padding-left: 1.15rem; color: var(--muted); }
+.included-digital { margin-top: 1.25rem; color: var(--gold-dark); }
 .tag { display: inline-block; padding: .25rem .6rem; border-radius: 999px; background: #eee6dc; color: var(--gold-dark); font-size: .75rem; font-weight: 800; text-transform: uppercase; }
 .table-wrap { overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; background: white; }
