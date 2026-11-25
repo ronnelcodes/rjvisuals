@@ -109,6 +109,9 @@ input:focus, select:focus, textarea:focus { outline: 3px solid rgba(184,139,85,.
 .portal-card { width: min(540px, 100%); padding: clamp(1.5rem, 5vw, 3.5rem); border-radius: var(--radius); background: white; box-shadow: var(--shadow); text-align: center; }
 .portal-card h1 { font-size: clamp(2.4rem, 6vw, 3.8rem); overflow-wrap: normal; }
 .portal-card form { text-align: left; }
+.portal-card .admin-reset-link { display: block; width: 100%; margin-top: 1rem; text-align: center; }
+.portal-card .auth-back { margin-bottom: 1.25rem; }
+.portal-card form h2 { margin-top: 0; }
 .gallery-toolbar { position: sticky; top: 76px; z-index: 20; display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem; background: rgba(247,245,241,.95); }
 .print-order-section { background: #eee8df; }
 .print-order-section .form-card { margin-top: 2rem; }

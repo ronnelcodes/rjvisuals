@@ -15,18 +15,19 @@ Launch-ready static HTML, CSS, and JavaScript website with Netlify Forms, Netlif
 1. Create a Supabase project.
 2. In Supabase SQL Editor, run `supabase/schema.sql`.
 3. Create one Supabase Auth user for the administrator.
-4. In Supabase SQL Editor, set the admin email used by the storage policy:
+4. In Supabase Authentication, open URL Configuration and add `https://www.rjvisuals.online/admin.html` and `https://rjvisuals.online/admin.html` to the Redirect URLs. The admin sign-in page uses these addresses for password-reset links.
+5. In Supabase SQL Editor, set the admin email used by the storage policy:
 
    `alter database postgres set app.settings.admin_email = 'your-email@example.com';`
 
-5. In Netlify, add these environment variables:
+6. In Netlify, add these environment variables:
 
    - `SUPABASE_URL`
    - `SUPABASE_ANON_KEY`
    - `SUPABASE_SERVICE_ROLE_KEY`
    - `ADMIN_EMAIL`
 
-6. Deploy the folder to Netlify and connect `rjvisuals.online` only after testing the Netlify URL.
+7. Deploy the folder to Netlify and connect `rjvisuals.online` only after testing the Netlify URL.
 
 ## WordPress gallery migration
 
