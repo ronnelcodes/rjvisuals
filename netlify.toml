@@ -3,28 +3,6 @@
   publish = "dist"
   functions = "netlify/functions"
 
-[[redirects]]
-  from = "/api/admin-gallery"
-  to = "/.netlify/functions/admin-gallery"
-  status = 200
-
-[[redirects]]
-  from = "/api/client-gallery"
-  to = "/.netlify/functions/client-gallery"
-  status = 200
-
-[[redirects]]
-  from = "/client-galleries"
-  to = "/gallery.html"
-  status = 302
-  force = true
-
-[[redirects]]
-  from = "/client-galleries.html"
-  to = "/gallery.html"
-  status = 302
-  force = true
-
 [[headers]]
   for = "/admin.html"
   [headers.values]
@@ -44,6 +22,6 @@
     Cache-Control = "no-store"
 
 [[redirects]]
-  from = "/api/gallery-recovery"
-  to = "/.netlify/functions/gallery-recovery"
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
   status = 200
