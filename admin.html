@@ -19,6 +19,25 @@ body{background:#F7F3EE;color:#171519}
 #admin-login :is(input,button):focus-visible{outline:2px solid #563A54;outline-offset:3px}
 #admin-login #login-status:empty{display:none}
 @media(max-width:620px){#admin-login #login-form:not(.hidden){grid-template-columns:1fr}}
+
+#admin-app{--ink:#171519;--plum:#563A54;--ivory:#F7F3EE;--gold:#C7A66A;--line:#d8cdd4;max-width:1320px;margin:clamp(20px,4vw,44px) auto;padding:0 clamp(16px,4vw,44px) 48px;gap:clamp(16px,3vw,32px);background:var(--ivory);color:var(--ink);font-family:Arial,sans-serif}
+#admin-app .admin-main{min-width:0;background:transparent;padding:0}
+#admin-app .admin-side{background:var(--ink);color:var(--ivory);border-radius:16px;padding:24px}
+#admin-app .admin-side h2,#admin-app .admin-side p{color:inherit}
+#admin-app #sign-out{border:1px solid var(--ivory);color:var(--ivory);background:transparent}
+#admin-app #sign-out:hover{background:var(--ivory);color:var(--ink)}
+#admin-app .eyebrow{color:var(--plum)}
+#admin-app h1{font:800 clamp(2.5rem,6vw,5rem)/.98 Arial,sans-serif;letter-spacing:-.06em;text-transform:uppercase;overflow-wrap:anywhere;margin:.15em 0 .4em}
+#admin-app h2{font:750 clamp(1.2rem,2.8vw,1.55rem)/1.2 Arial,sans-serif}
+#admin-app :is(.admin-stat,.form-card,.photo-manager){background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:none}
+#admin-app .admin-stat{border-top:3px solid var(--gold)}
+#admin-app .admin-stat strong{color:var(--plum)}
+#admin-app .photo-manager{padding:clamp(16px,3vw,28px);margin-top:24px}
+#admin-app input,#admin-app select{max-width:100%;border-color:var(--line);border-radius:6px}
+#admin-app .button:not(.alt):not(.delete-button):not(#sign-out){background:var(--plum);border-color:var(--plum);color:#fff}
+#admin-app :is(a,button,input,select):focus-visible{outline:2px solid var(--plum);outline-offset:3px}
+#admin-app .admin-side button:focus-visible{outline-color:var(--ivory)}
+@media(max-width:780px){#admin-app:not(.hidden),#admin-app .split{grid-template-columns:minmax(0,1fr)}}
 </style>
 </head>
   <body><div class="studio-header"><header class="rj-site-header">
