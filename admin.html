@@ -1,4 +1,53 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Gallery Admin | RJ Visuals</title><meta name="robots" content="noindex,nofollow"><link rel="stylesheet" href="/assets/css/styles.css"><script src="/assets/js/site.js" defer></script></head><body><div data-header></div><main id="main">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Gallery Admin | RJ Visuals</title><meta name="robots" content="noindex,nofollow"><link rel="stylesheet" href="/assets/css/styles.css"><script src="/assets/js/site.js" defer></script></head>
+  <style>
+  #admin-login {
+    background: #F7F3EE;
+    color: #171519;
+  }
+  #admin-login .portal-card {
+    text-align: left;
+    background: #fff;
+    border: 1px solid #d8cdd4;
+    border-top: 4px solid #563A54;
+    border-radius: 12px;
+  }
+  #admin-login .portal-card::before {
+    content: "";
+    display: block;
+    width: 150px;
+    height: 62px;
+    margin-bottom: 1rem;
+    background: url("/assets/images/RJ-Visuals-Horizontal-Logo.svg") left center / contain no-repeat;
+  }
+  #admin-login .eyebrow {
+    color: #563A54;
+  }
+  #admin-login h1 {
+    font: 800 clamp(2.75rem, 8vw, 4.25rem)/1 Arial, sans-serif;
+    letter-spacing: -.055em;
+    text-transform: uppercase;
+  }
+  #admin-login .button.gold {
+    background: #563A54;
+    border-color: #563A54;
+    color: #fff;
+  }
+  #admin-login .text-button {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    color: #563A54;
+    font: inherit;
+    text-decoration: underline;
+    text-underline-offset: .2em;
+    cursor: pointer;
+  }
+  #admin-login :is(input, button):focus-visible {
+    outline: 2px solid #563A54;
+    outline-offset: 3px;
+  }
+</style>
+  <body><div data-header></div><main id="main">
 <section id="admin-login" class="portal-shell"><div class="portal-card"><p class="eyebrow">RJ Visuals administration</p><h1>Sign in</h1><form id="login-form"><label>Email<input id="admin-email" type="email" autocomplete="username" required></label><label>Password<input id="admin-password" type="password" autocomplete="current-password" required></label><button class="button gold" type="submit">Sign in</button><button id="forgot-password" class="text-button admin-reset-link" type="button">Forgot your password?</button><p id="login-status" role="status"></p></form><form id="reset-request-form" class="hidden"><button id="back-to-login" class="text-button auth-back" type="button">&#8592; Return to sign in</button><h2>Reset your password</h2><p>Enter the email address used for the RJ Visuals administrator account. A secure reset link will be sent to that address.</p><label>Email<input id="reset-email" type="email" autocomplete="email" required></label><button class="button gold" type="submit">Send reset link</button><p id="reset-request-status" role="status"></p></form><form id="new-password-form" class="hidden"><h2>Create a new password</h2><p>Use at least 10 characters. A longer, unique password is safer.</p><label>New password<input id="new-admin-password" type="password" autocomplete="new-password" minlength="10" required></label><label>Confirm new password<input id="confirm-admin-password" type="password" autocomplete="new-password" minlength="10" required></label><button class="button gold" type="submit">Save new password</button><p id="new-password-status" role="status"></p></form></div></section>
 <section id="admin-app" class="admin-layout hidden"><aside class="admin-side"><h2>RJ Visuals</h2><p>Gallery administration</p><button id="sign-out" class="button small alt">Sign out</button></aside><div class="admin-main"><p class="eyebrow">Private gallery manager</p><h1>Client galleries</h1><p id="dashboard-status" role="status"></p><div class="admin-stat-grid"><div class="admin-stat"><strong id="gallery-count">0</strong> galleries</div><div class="admin-stat"><strong id="published-count">0</strong> published</div><div class="admin-stat"><strong id="photo-count">0</strong> photographs</div></div>
 <div class="split"><section><h2>Galleries</h2><div id="admin-gallery-list" class="admin-list"></div></section><section class="form-card"><h2 id="gallery-form-title">Create gallery</h2><form id="gallery-form"><label>Gallery title<input id="gallery-title" required placeholder="Bevington Anniversary"></label><label>Gallery address<input id="gallery-slug" required pattern="[a-z0-9-]+" placeholder="bevington-anniversary"></label><label>Client name<input id="gallery-client" required></label><label>Gallery password<input id="gallery-password" type="password" minlength="10" required></label><small id="password-help">Use at least 10 characters.</small><label>Status<select id="gallery-status"><option value="draft">Draft</option><option value="published">Published</option><option value="archived">Archived</option></select></label><div class="button-row"><button id="gallery-submit" class="button gold" type="submit">Create gallery</button><button id="cancel-edit" class="button alt hidden" type="button">Cancel editing</button></div><p id="admin-status" role="status"></p></form></section></div>
