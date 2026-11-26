@@ -1,0 +1,15 @@
+.rp-page { max-width: 1200px; margin-inline: auto; }
+.rp-intro { padding-block: clamp(3rem, 8vw, 7rem) 2rem; }
+.rp-intro h1 { font: 500 clamp(3rem, 9vw, 7rem)/1.03 "Playfair Display", Georgia, serif; margin: .45rem 0; }
+.rp-intro em { color: #563a54; }
+.rp-intro p { max-width: 38rem; }
+.rp-intro nav { display: flex; flex-wrap: wrap; gap: .7rem 1.5rem; margin-top: 1.5rem; }
+.rp-intro nav a { text-decoration: underline; text-underline-offset: .3em; }
+.rp-group { border-top: 1px solid #cfc5c8; padding-block: 2.5rem; scroll-margin-top: 7rem; }
+.rp-group h2, .rp-book h2 { font: 500 clamp(1.9rem, 5vw, 3rem)/1.2 "Playfair Display", Georgia, serif; margin: 0 0 1rem; }
+.rp-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: .85rem; margin-bottom: 1.2rem; }
+.rp-grid figure { margin: 0; }
+.rp-grid a, .rp-grid img { display: block; width: 100%; }
+.rp-grid img { aspect-ratio: 4/5; object-fit: cover; }
+.rp-book, .pf-portfolio-cta { text-align: center; padding-block: 2rem 3rem; }
+@media (max-width: 720px) { .rp-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
