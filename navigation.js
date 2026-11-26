@@ -1,5 +1,19 @@
 "use strict";
 (() => {
+  const brand = document.querySelector(".rj-site-logo");
+if (brand) {
+  const logo = new Image();
+  logo.alt = "RJ Visuals";
+  logo.style.cssText = "display:block;width:min(180px,40vw);height:70px;object-fit:contain;object-position:left center";
+  logo.onload = () => brand.replaceChildren(logo);
+  logo.src = "/assets/images/RJ-Visuals-Horizontal-Logo.svg";
+}
+
+const favicon = document.querySelector('link[rel~="icon"]')
+  || document.head.appendChild(document.createElement("link"));
+favicon.rel = "icon";
+favicon.type = "image/svg+xml";
+favicon.href = "/assets/images/RJ-Visuals-Favicon.svg";
   const btn=document.getElementById("rjMenuToggle");
   const nav=document.getElementById("rjNavigation");
   if(!btn||!nav)return;
