@@ -1,0 +1,8 @@
+.rj-customer-footer{box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);align-items:start;gap:1.5rem;padding:2rem max(5vw,1rem);background:#F7F3EE;color:#171519;border-top:1px solid #d8cdd4;font:1rem/1.5 Arial,sans-serif;text-align:left}
+.rj-customer-footer img{display:block;width:150px;height:76px;object-fit:contain;object-position:left center}
+.rj-customer-footer p{margin:.5rem 0 0}
+.rj-customer-footer nav{display:flex;flex-wrap:wrap;gap:.75rem 1.25rem;padding-top:1.25rem}
+.rj-customer-footer a{color:#563A54;text-decoration:underline;text-underline-offset:.2em}
+.rj-customer-footer a:focus-visible{outline:2px solid #563A54;outline-offset:4px}
+.rj-customer-footer small{grid-column:1/-1}
+@media(max-width:620px){.rj-customer-footer{grid-template-columns:1fr}.rj-customer-footer nav{padding-top:0}}
