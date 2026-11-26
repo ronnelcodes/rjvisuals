@@ -13,6 +13,18 @@
   to = "/.netlify/functions/client-gallery"
   status = 200
 
+[[redirects]]
+  from = "/client-galleries"
+  to = "/gallery.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/client-galleries.html"
+  to = "/gallery.html"
+  status = 302
+  force = true
+
 [[headers]]
   for = "/admin.html"
   [headers.values]
