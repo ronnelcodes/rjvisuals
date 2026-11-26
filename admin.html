@@ -1,5 +1,53 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="noindex,nofollow" name="robots"/><title>Studio Admin | RJ Visuals</title><link href="legacy.css" rel="stylesheet"/><script src="config.js"></script><script src="admin.js" type="module"></script><link href="navigation.css" rel="stylesheet"/><script defer="" src="navigation.js"></script></head>
+  <style>
+  #admin-login {
+    background: #F7F3EE;
+    color: #171519;
+  }
+  #admin-login .portal-card {
+    text-align: left;
+    background: #fff;
+    border: 1px solid #d8cdd4;
+    border-top: 4px solid #563A54;
+    border-radius: 12px;
+  }
+  #admin-login .portal-card::before {
+    content: "";
+    display: block;
+    width: 150px;
+    height: 62px;
+    margin-bottom: 1rem;
+    background: url("/assets/images/RJ-Visuals-Horizontal-Logo.svg") left center / contain no-repeat;
+  }
+  #admin-login .eyebrow {
+    color: #563A54;
+  }
+  #admin-login h1 {
+    font: 800 clamp(2.75rem, 8vw, 4.25rem)/1 Arial, sans-serif;
+    letter-spacing: -.055em;
+    text-transform: uppercase;
+  }
+  #admin-login .button.gold {
+    background: #563A54;
+    border-color: #563A54;
+    color: #fff;
+  }
+  #admin-login .text-button {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    color: #563A54;
+    font: inherit;
+    text-decoration: underline;
+    text-underline-offset: .2em;
+    cursor: pointer;
+  }
+  #admin-login :is(input, button):focus-visible {
+    outline: 2px solid #563A54;
+    outline-offset: 3px;
+  }
+</style>
 <body class="page-shell"><header class="rj-site-header">
 <a aria-label="RJ Visuals home" class="rj-site-logo" href="index.html">RJ <span>VISUALS</span><b>.</b></a>
 <button aria-controls="rjNavigation" aria-expanded="false" aria-label="Open site navigation" class="rj-hamburger" id="rjMenuToggle" type="button">
