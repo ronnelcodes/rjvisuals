@@ -1,0 +1,16 @@
+
+.rj-terms-content{max-width:920px;margin:0 auto;padding:70px 24px 110px;font-family:"DM Sans",Arial,sans-serif;color:#171519}
+.rj-terms-content h1{font-family:Georgia,serif;line-height:1.07;font-weight:400;font-size:clamp(2.4rem,5.5vw,5.8rem);letter-spacing:-.045em;margin:28px 0 45px}
+.rj-terms-content h1 em{color:#563A54}
+.rj-terms-content h2{margin:40px 0 12px;font-size:1.35rem;color:#563A54}
+.rj-terms-content p{line-height:1.85;font-size:1rem}
+.rj-terms-content .eyebrow{letter-spacing:.18em;font-size:.72rem;font-weight:800;color:#563A54}
+.rj-terms-note{background:#efe6eb;border-left:4px solid #563A54;padding:20px;margin:40px 0}
+.rj-terms-cta{background:#C7A66A;color:#171519;display:inline-block;padding:17px 23px;font-weight:800;text-decoration:none}
+.rj-terms-content h3{margin:1.8rem 0 .6rem;font-size:1.15rem}
+.rj-terms-content h4{margin:1.5rem 0 .6rem;font-size:1rem}
+.rj-terms-content li{line-height:1.7;margin:.35rem 0}
+.rj-terms-content a{color:#563A54;text-decoration:underline}
+.rj-terms-content [id]{scroll-margin-top:7rem}
+.rj-terms-skip{position:absolute;left:1rem;top:-6rem;z-index:9999;background:#171519;color:#fff;padding:.8rem}
+.rj-terms-skip:focus{top:1rem}

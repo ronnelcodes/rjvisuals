@@ -1,32 +1,37 @@
 [build]
-  publish = "."
+  command = "node build-public.mjs"
+  publish = "dist"
   functions = "netlify/functions"
 
 [[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
+  from = "/api/admin-gallery"
+  to = "/.netlify/functions/admin-gallery"
+  status = 200
+
+[[redirects]]
+  from = "/api/client-gallery"
+  to = "/.netlify/functions/client-gallery"
   status = 200
 
 [[headers]]
-  for = "/*"
+  for = "/admin.html"
   [headers.values]
-    X-Frame-Options = "DENY"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
-    Content-Security-Policy = "default-src 'self'; img-src 'self' data: https://*.supabase.co; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://*.supabase.co; font-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-store"
 
 [[headers]]
-  for = "/assets/images/*"
+  for = "/gallery.html"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    X-Robots-Tag = "noindex, nofollow"
+    Referrer-Policy = "no-referrer"
+    Cache-Control = "no-store"
 
 [[headers]]
-  for = "/assets/css/*"
+  for = "/admin.js"
   [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
+    Cache-Control = "no-store"
 
-[[headers]]
-  for = "/assets/js/*"
-  [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
+[[redirects]]
+  from = "/api/gallery-recovery"
+  to = "/.netlify/functions/gallery-recovery"
+  status = 200

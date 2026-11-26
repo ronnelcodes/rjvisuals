@@ -1,13 +1,9 @@
 {
-  "name": "rj-visuals-netlify",
-  "version": "1.0.0",
+  "name": "rjvisuals-site",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
-  "scripts": {
-    "dev": "netlify dev",
-    "test": "node --test tests/*.test.js"
-  },
-  "engines": { "node": ">=20" },
-  "devDependencies": { "netlify-cli": "^23.5.0" }
+  "scripts": { "start": "netlify dev" },
+  "dependencies": { "@supabase/supabase-js": "^2.49.0", "sharp": "^0.33.5" },
+  "devDependencies": { "netlify-cli": "^23.0.0" }
 }
-
